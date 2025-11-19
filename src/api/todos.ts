@@ -22,3 +22,9 @@ export const updateTodo = (todoId: number, data: Partial<Omit<Todo, 'id'>>) => {
 export const deleteTodo = (todoId: number) => {
   return client.delete(`/todos/${todoId}`);
 };
+
+export const deleteCompletedTodos = (completedTodoIds: number[]) => {
+  return Promise.all(
+    completedTodoIds.map((id) => client.delete(`/todos/${id}`))
+  );
+}
